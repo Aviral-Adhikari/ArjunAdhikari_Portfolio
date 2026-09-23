@@ -1,0 +1,9 @@
+{
+  "reviewRequired": [
+    { "field": "UNICEF project dates", "sourceValue": "7 Dec 2000 to 31 Jan 2000", "publicHandling": "Role shown as 2000 without a precise range." },
+    { "field": "FAO School Feeding Project end date", "sourceValue": "31 Nov 1999", "publicHandling": "Shown as October–November 1999." },
+    { "field": "FMDI cooperative governance training year", "sourceValue": "Not specified", "publicHandling": "Dates shown as 8–11 December without a year." },
+    { "field": "Preferred public office address", "sourceValue": "Legal Heart Pvt. Ltd., Maitighar Mandala, Kathmandu", "publicHandling": "Used as the office / mailing address pending confirmation." },
+    { "field": "Professional portrait or logo", "sourceValue": "Not supplied", "publicHandling": "Text-led monogram used in the hero." }
+  ]
+}
