@@ -1,44 +1,57 @@
 # Advocate Arjun Adhikari Portfolio
 
-A responsive bilingual portfolio built with plain HTML, CSS, and JavaScript.
+A responsive bilingual portfolio and blog built with plain HTML, CSS, and JavaScript.
+
+## Project layout
+
+The working website now lives directly in the repository root:
+
+- `index.html` — portfolio structure, SEO metadata and contact details
+- `blogs.html` — dedicated searchable blog archive
+- `content.js` — services, experience, education, training and FAQ content
+- `blog-posts.js` — published blog articles
+- `app.js`, `blog-page.js`, `preloader.js` — interactions and language behaviour
+- `styles.css`, `fullscreen.css`, `refinements.css`, `blog-page.css` — visual and responsive design
+- `assets/` — public images and animated assets
+
+`dist/` remains the deployment mirror because `.openai/hosting.json` is configured to publish that supported static directory.
 
 ## Run locally
 
-From the project directory, serve the `dist` folder with any static server. For example:
+From the repository root:
 
 ```powershell
-python -m http.server 8765 --directory dist
+python -m http.server 8765 --directory .
 ```
 
-Then open `http://127.0.0.1:8765/`.
+Then open `http://127.0.0.1:8765/index.html` or `http://127.0.0.1:8765/blogs.html`.
 
-## Update site content
+## Update and deploy
 
-- `dist/content.js` contains services, experience, education, training, FAQ content, and both language versions.
-- `dist/app.js` contains interface translations and behaviour.
-- `dist/index.html` contains page structure, SEO metadata, contact details, and structured data.
-- `dist/styles.css` contains the visual design and responsive rules.
-- `content/owner-review.json` lists facts that still require owner confirmation.
-- `.private/owner-profile.private.json` retains personal CV fields outside the deployed `dist` directory. Do not move this file into `dist`.
+Edit the files in the repository root. Before deploying through the existing Sites configuration, mirror the public root files into `dist`:
+
+```powershell
+.\sync-to-dist.ps1
+```
+
+The script copies only the public website files and assets. It does not copy `.private/`, project notes or repository metadata.
+
+## Blog publishing
+
+See `BLOGGING.md`. New posts are added to `blog-posts.js`; the archive, search, filters and article reader update automatically.
 
 ## Contact form integration
 
-The form validates locally but deliberately does not claim to send until a form endpoint is configured.
+The form validates locally but deliberately does not claim to send until a secure form endpoint is configured.
 
-1. Create a form endpoint with a provider such as Formspree, Basin, or your own serverless handler.
-2. Add server-side spam protection, rate limiting, and an allowlist for the website origin.
-3. In `dist/content.js`, set `formEndpoint` to the provider endpoint URL.
-4. Never place private API keys or server credentials in files under `dist`.
-5. Submit a real test and confirm receipt before publishing the enabled form.
+1. Create a form endpoint with a provider such as Formspree, Basin, or a serverless handler.
+2. Add server-side spam protection, rate limiting and an allowlist for the website origin.
+3. In `content.js`, set `formEndpoint` to the endpoint URL.
+4. Run `sync-to-dist.ps1` before deployment.
+5. Never place private API keys or server credentials in public files.
 
-## Deployment
+## Private and review material
 
-The publishable directory is `dist`. Upload that directory to any static host, or use the existing Sites configuration in `.openai/hosting.json`.
+- `content/owner-review.json` lists facts that still require owner confirmation.
+- `.private/owner-profile.private.json` retains personal CV fields outside the public website. Never copy it into `dist` or `assets`.
 
-## Owner material still needed
-
-- Confirmation of the UNICEF project date range
-- Confirmation of the FAO project end date
-- Year of the FMDI cooperative governance training
-- Preferred public office address
-- A professional portrait and/or brand logo, if desired
